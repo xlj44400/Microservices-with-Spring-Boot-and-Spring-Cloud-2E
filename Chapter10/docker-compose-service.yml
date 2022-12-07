@@ -1,0 +1,38 @@
+version: '2.1'
+
+services:
+  product:
+    build: microservices/product-service
+    mem_limit: 256m
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+
+  recommendation:
+    build: microservices/recommendation-service
+    mem_limit: 256m
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+
+  review:
+    build: microservices/review-service
+    mem_limit: 256m
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+
+  product-composite:
+    build: microservices/product-composite-service
+    mem_limit: 256m
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      
+  eureka:
+    build: spring-cloud/eureka-server
+    mem_limit: 256m
+
+  gateway:
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    build: spring-cloud/gateway
+    mem_limit: 256m
+    ports:
+      - "8080:8080"
